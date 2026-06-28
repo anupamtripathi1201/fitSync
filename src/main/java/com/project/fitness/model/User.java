@@ -13,9 +13,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
 @Id
@@ -35,5 +41,7 @@ private List<Activity> activities = new ArrayList<>();
 @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
 @JsonIgnore
 private List<Reccomendation> reccomendations = new ArrayList<>();
+
+
     
 }
