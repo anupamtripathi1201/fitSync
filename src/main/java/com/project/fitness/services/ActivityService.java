@@ -18,7 +18,7 @@ public class ActivityService {
     private final ActivityRepository activity_repository;
     private final UserRepository user_repo;
     public ActivityResponse trackActivity(ActivityRequest activity_request){
-        User user = user_repo.findById(activity_request.getUser_id()).orElseThrow()new RuntimeException("Invalid User");
+        User user = user_repo.findById(activity_request.getUser_id()).orElseThrow(()->new RuntimeException("Invalid User"));
         Activity activity = new Activity().builder().user(user).duration(activity_request.getDuration()).caloriesBurned(activity_request.getCaloriesBurned()).type(activity_request.getType()).startTime(activity_request.getStartTime()).additionMetrics(activity_request.getAdditionMetrics()).build();
 
        Activity saved_Activity= activity_repository.save(activity);
