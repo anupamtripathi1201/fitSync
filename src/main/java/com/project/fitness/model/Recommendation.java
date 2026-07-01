@@ -1,10 +1,14 @@
 package com.project.fitness.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.repository.cdi.Eager;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reccomendation {
+public class Recommendation {
 
 
     @Id
@@ -35,7 +39,7 @@ public class Reccomendation {
     private String type;
 
     @Column(length  =3000)
-    private String reccomendation;
+    private String recommendation;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "json")
@@ -45,15 +49,26 @@ public class Reccomendation {
     @Column(columnDefinition = "json")
     private List<String> suggestions;
 
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition = "json")
+    private List<String> safetyTips;
+
+
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false,foreignKey = @ForeignKey(name = "fk_reccomendation"))
+    @JoinColumn(name = "userId",nullable = false,foreignKey = @ForeignKey(name = "fk_reccomendation"))
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "activity_id",nullable = false,foreignKey = @ForeignKey(name = "fk_activity"))
+    @JoinColumn(name = "activityId",nullable = false,foreignKey = @ForeignKey(name = "fk_activity"))
     @JsonIgnore
     private Activity activities;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     
     

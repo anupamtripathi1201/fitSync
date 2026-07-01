@@ -62,13 +62,14 @@ public class Activity {
     private Map<String,Object> additionMetrics;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false,foreignKey = @ForeignKey(name = "fk_user_id"))
+    @JoinColumn(name = "userId",nullable = false,foreignKey = @ForeignKey(name = "fk_user_id"))
     @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "activities",cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
-    private List<Reccomendation> reccomendation = new ArrayList<>();
+    private List<Recommendation> reccomendation = new ArrayList<>();
+
 
     
 }

@@ -48,7 +48,7 @@ private List<Activity> activities = new ArrayList<>();
 
 @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
 @JsonIgnore
-private List<Reccomendation> reccomendations = new ArrayList<>();
+private List<Recommendation> reccomendations = new ArrayList<>();
 
 
     

@@ -1,5 +1,8 @@
 package com.project.fitness.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,33 @@ public class ActivityService {
         response.setStartTime(saved_Activity.getStartTime());
 
         return response;
+
+
+    }
+
+    public List<ActivityResponse> getActivity(String userId){
+      List<Activity> activities = activity_repository.findByUserId(userId);
+
+      return activities.stream()
+      .map(activity -> {
+          ActivityResponse response = new ActivityResponse();
+
+          response.setId(activity.getId());
+          response.setUser_id(activity.getUser().getId());
+          response.setType(activity.getType());
+          response.setDuration(activity.getDuration());
+          response.setCaloriesBurned(activity.getCaloriesBurned());
+          response.setStartTime(activity.getStartTime());
+          response.setCreatedAt(activity.getCreatedAt());
+          response.setUpdatedAt(activity.getUpdatedAt());
+          response.setAdditionMetrics(activity.getAdditionMetrics());
+
+          return response;
+      })
+      .toList();
+
+
+
 
 
     }
